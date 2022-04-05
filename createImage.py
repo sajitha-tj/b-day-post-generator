@@ -7,8 +7,12 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 from PIL import Image, ImageFont, ImageDraw, ImageOps
 import datetime
 
-os.mkdir(f'{dir_path}/Images')
-os.mkdir(f'{dir_path}/cropped_photo')
+if (os.path.isdir(f'{dir_path}/Images') == False):
+ os.mkdir(f'{dir_path}/Images')
+else:
+    pass
+if(os.path.isdir(f'{dir_path}/cropped_photo') == False):
+ os.mkdir(f'{dir_path}/cropped_photo')
 
 
 nameOfFriend=input("Enter the Name of the Friend :")
