@@ -1,4 +1,5 @@
 import os,requests
+from turtle import bgcolor
 from tkinter import PhotoImage
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -6,21 +7,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 from PIL import Image, ImageFont, ImageDraw, ImageOps
 import datetime
 
-fileforbackgroundremover = os.listdir(f'{dir_path}/Images/')
 
-
-filename = 'images/'+ fileforbackgroundremover[0]
-response = requests.post(
-    'https://api.remove.bg/v1.0/removebg',
-    files={'image_file': open(filename, 'rb')},
-    data={'size': 'auto'},
-    headers={'X-Api-Key': 'mHJmyP9XPKAcTUCVXHtE8tut'},
-)
-if response.status_code == requests.codes.ok:
-    with open('Photo of Friend/nobg.png', 'wb') as out:
-        out.write(response.content)
-else:
-    print("Error:", response.status_code, response.text)
 
 
 nameOfFriend=input("Enter the Name of the Friend :")
@@ -51,14 +38,14 @@ mask = Image.new('L',maskSize,0)
 draw = ImageDraw.Draw(mask)
 draw.ellipse((0,0)+maskSize,fill=255)
 
-fileOfPhoto = os.listdir(f'{dir_path}/Photo of Friend/')
+fileOfPhoto = os.listdir(f'{dir_path}/Images/')
 
 if(fileOfPhoto.__len__() > 1):
     print('Try Again!')
     print("please leave only 1 photo in 'Photos of Friend' folder...")
     exit()
 
-photoOfFriend = Image.open(f'{dir_path}/Photo of Friend/{fileOfPhoto[0]}').convert("RGBA")
+photoOfFriend = Image.open(f'{dir_path}/Images/{fileOfPhoto[0]}').convert("RGBA")
 photoOfFriend = photoOfFriend.convert("RGBA")
 croppedPhoto = ImageOps.fit(photoOfFriend, mask.size, centering=(0.5,0.5))
 
@@ -66,11 +53,28 @@ if(isCircle =="Y"):
     croppedPhoto.putalpha(mask)
 
 croppedPhoto = croppedPhoto.convert("RGBA")
+croppedPhoto.save(f'{dir_path}/cropped_photo/cropped.png')
+
+fileforbackgroundremover = os.listdir(f'{dir_path}/cropped_photo/')
 
 
+filename = 'cropped_photo/'+ fileforbackgroundremover[0]
+response = requests.post(
+    'https://api.remove.bg/v1.0/removebg',
+    files={'image_file': open(filename, 'rb')},
+    data={'size': 'auto'},
+    headers={'X-Api-Key': 'mHJmyP9XPKAcTUCVXHtE8tut'},
+)
+if response.status_code == requests.codes.ok:
+    with open('Photo of Friend/nobg.png', 'wb') as out:
+        out.write(response.content)
+else:
+    print("Error:", response.status_code, response.text)
+
+readyimage = Image.open(f'{dir_path}/Photo of Friend/nobg.png').convert("RGBA")
 
 myImage = myImage.convert("RGBA")
-myImage.paste(croppedPhoto,(570,75), croppedPhoto)
+myImage.paste(readyimage,(570,75), readyimage)
 
 
 
