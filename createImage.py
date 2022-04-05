@@ -1,5 +1,4 @@
 import os,requests
-from turtle import bgcolor
 from tkinter import PhotoImage
 
 dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -18,12 +17,12 @@ if(os.path.isdir(f'{dir_path}/cropped_photo') == False):
 nameOfFriend=input("Enter the Name of the Friend :")
 nameOfFriend = nameOfFriend.title()
 
-bdayOfFriend=input("Enter the date of Birth(dd) :")
-bdayOfFriend=f'{bdayOfFriend}.{input("Enter the month of Birth(mm) :")}'
+bdayOfFriend=input("Enter the Date of Birth (dd) :")
+bdayOfFriend=f'{bdayOfFriend}.{input("Enter the Month of Birth (mm) :")}'
 year = datetime.date.today().year
 bdayOfFriend = f'{bdayOfFriend}.{year}'
 
-isCircle = input("Do you need Circle-crop (y?N) :").upper()
+isCircle = input("Do you need Circle-crop (y/N) :").upper()
 
 myImage = Image.open(f'{dir_path}/template.png')
 W,H = myImage.size
@@ -87,6 +86,8 @@ myImage.save(f'{dir_path}/Created Images/{nameOfFriend} {year} B day.png')
 
 os.remove(f'{dir_path}/Images/nobg.png')
 os.remove(f'{dir_path}/cropped_photo/cropped.png')
+os.removedirs(f'{dir_path}/Images')
+os.removedirs(f'{dir_path}/cropped_photo')
 
 print("Image Created")
 

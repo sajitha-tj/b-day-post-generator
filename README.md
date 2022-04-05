@@ -2,13 +2,12 @@
 This is a simple program which generates Birthday Posts for the Members of Sasnaka Sansada.
 
 # Dependencies
-Pillow - To generate image
+Pillow - To generate image  
 Requests - To api call with remove.bg
 
 Install Pillow and Requests
 ```
-pip install pillow
-pip install requests
+pip install -r requirements.txt
 ```
 
 # Usage and Results
@@ -17,3 +16,4 @@ Then the post will be generated as "[Friend's Name] [current year] B day.png" in
 
 # Contributors
 Huge thanks goes to Chamaru Amasara who gave the concept for this and Aruna Ehelepola who designed the post template.
+Special thanks to Yasantha Niroshan who improved the program with the remove.bg api. 
