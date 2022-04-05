@@ -3,10 +3,12 @@ This is a simple program which generates Birthday Posts for the Members of Sasna
 
 # Dependencies
 Pillow - To generate image
+Requests - To api call with remove.bg
 
-Install Pillow
+Install Pillow and Requests
 ```
 pip install pillow
+pip install requests
 ```
 
 # Usage and Results
