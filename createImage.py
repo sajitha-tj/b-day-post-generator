@@ -81,5 +81,7 @@ myImage.paste(readyimage,(570,75), readyimage)
 myImage.save(f'{dir_path}/Created Images/{nameOfFriend} {year} B day.png')
 
 print("Image Created")
+os.remove(f'{dir_path}/Images/nobg.png')
+os.remove(f'{dir_path}/cropped_photo/cropped.png')
 
 exit()
