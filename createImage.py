@@ -90,5 +90,7 @@ os.removedirs(f'{dir_path}/Images')
 os.removedirs(f'{dir_path}/cropped_photo')
 
 print("Image Created")
+os.remove(f'{dir_path}/Images/nobg.png')
+os.remove(f'{dir_path}/cropped_photo/cropped.png')
 
 exit()
